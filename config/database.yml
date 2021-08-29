@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch('DB_POOL') { 5 } %>
+  database: boilerplate
+  host: <%= ENV.fetch('POSTGRES_HOST') { 'localhost' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { '' } %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { '' } %>
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  database: boilerplate_test
+  host: <%= ENV.fetch('POSTGRES_HOST') { 'localhost' } %>
+  username: <%= ENV.fetch('POSTGRES_USER') { '' } %>
+  password: <%= ENV.fetch('POSTGRES_PASSWORD') { '' } %>
+
+production:
+  url: <%= ENV['POSTGRES_URL'] %>
+  pool: <%= ENV.fetch('DB_POOL') { 5 } %>

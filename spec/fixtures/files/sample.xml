@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Return xmlns="http://www.irs.gov/efile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.irs.gov/efile" returnVersion="2017v2.2">
+  <ReturnHeader binaryAttachmentCnt="0">
+    <ReturnTs>2018-05-10T15:53:27-05:00</ReturnTs>
+    <TaxPeriodEndDt>2017-12-31</TaxPeriodEndDt>
+    <PreparerFirmGrp>
+      <PreparerFirmEIN>954557617</PreparerFirmEIN>
+      <PreparerFirmName>
+        <BusinessNameLine1Txt>Harrington Group CPAs LLP</BusinessNameLine1Txt>
+      </PreparerFirmName>
+      <PreparerUSAddress>
+        <AddressLine1Txt>234 East Colorado Blvd Suite M150</AddressLine1Txt>
+        <CityNm>Pasadena</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>91101</ZIPCd>
+      </PreparerUSAddress>
+    </PreparerFirmGrp>
+    <ReturnTypeCd>990</ReturnTypeCd>
+    <TaxPeriodBeginDt>2017-01-01</TaxPeriodBeginDt>
+    <Filer>
+      <EIN>200253310</EIN>
+      <BusinessName>
+        <BusinessNameLine1Txt>Pasadena Community Foundation</BusinessNameLine1Txt>
+      </BusinessName>
+      <BusinessNameControlTxt>PASA</BusinessNameControlTxt>
+      <PhoneNum>6267962097</PhoneNum>
+      <USAddress>
+        <AddressLine1Txt>301 E Colorado Blvd No 810</AddressLine1Txt>
+        <CityNm>Pasadena</CityNm>
+        <StateAbbreviationCd>CA</StateAbbreviationCd>
+        <ZIPCd>91101</ZIPCd>
+      </USAddress>
+    </Filer>
+    <BusinessOfficerGrp>
+      <PersonNm>Mariver Copeland</PersonNm>
+      <PersonTitleTxt>Chief Financial Officer</PersonTitleTxt>
+      <PhoneNum>6267962097</PhoneNum>
+      <SignatureDt>2018-05-10</SignatureDt>
+      <DiscussWithPaidPreparerInd>1</DiscussWithPaidPreparerInd>
+    </BusinessOfficerGrp>
+    <PreparerPersonGrp>
+      <PreparerPersonNm>Tonetta L Conner CPA</PreparerPersonNm>
+      <PTIN>P01775198</PTIN>
+      <PhoneNum>6264036801</PhoneNum>
+    </PreparerPersonGrp>
+    <FilingSecurityInformation>
+      <IPAddress>
+        <IPv4AddressTxt>64.88.174.3</IPv4AddressTxt>
+      </IPAddress>
+      <IPDt>2018-05-10</IPDt>
+      <IPTm>13:53:11</IPTm>
+      <IPTimezoneCd>PD</IPTimezoneCd>
+      <FilingLicenseTypeCd>P</FilingLicenseTypeCd>
+      <AtSubmissionCreationDeviceId>8397A78A26EEEFE4F0D1CC12463F2ED97210679C</AtSubmissionCreationDeviceId>
+      <AtSubmissionFilingDeviceId>C2C22B4F1B9AA0772E09E87A4EA864779F63AD2A</AtSubmissionFilingDeviceId>
+    </FilingSecurityInformation>
+    <TaxYr>2017</TaxYr>
+    <BuildTS>2018-06-14 16:35:46Z</BuildTS>
+  </ReturnHeader>
+  <ReturnData documentCnt="1">
+    <IRS990ScheduleI documentId="RetDoc1041900001">
+      <GrantRecordsMaintainedInd>1</GrantRecordsMaintainedInd>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>National Audubon Society</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>225 Varick Street 7th Floor</AddressLine1Txt>
+          <CityNm>New York</CityNm>
+          <StateAbbreviationCd>NY</StateAbbreviationCd>
+          <ZIPCd>10014</ZIPCd>
+        </USAddress>
+        <RecipientEIN>131624102</RecipientEIN>
+        <IRCSectionDesc>501(c)3</IRCSectionDesc>
+        <CashGrantAmt>864100</CashGrantAmt>
+        <PurposeOfGrantTxt>General Support</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Southern California Public Radio - KPCC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>474 S Raymond Ave</AddressLine1Txt>
+          <CityNm>Pasadena</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>91105</ZIPCd>
+        </USAddress>
+        <RecipientEIN>954765734</RecipientEIN>
+        <IRCSectionDesc>501(c)3</IRCSectionDesc>
+        <CashGrantAmt>14665</CashGrantAmt>
+        <PurposeOfGrantTxt>General Support</PurposeOfGrantTxt>
+      </RecipientTable>
+      <RecipientTable>
+        <RecipientBusinessName>
+          <BusinessNameLine1Txt>Southern California Public Radio - KPCC</BusinessNameLine1Txt>
+        </RecipientBusinessName>
+        <USAddress>
+          <AddressLine1Txt>474 S Raymond Ave</AddressLine1Txt>
+          <CityNm>Pasadena</CityNm>
+          <StateAbbreviationCd>CA</StateAbbreviationCd>
+          <ZIPCd>91105</ZIPCd>
+        </USAddress>
+        <RecipientEIN>954765734</RecipientEIN>
+        <IRCSectionDesc>501(c)3</IRCSectionDesc>
+        <CashGrantAmt>50000</CashGrantAmt>
+        <PurposeOfGrantTxt>Annual Support</PurposeOfGrantTxt>
+      </RecipientTable>
+      <Total501c3OrgCnt>157</Total501c3OrgCnt>
+      <TotalOtherOrgCnt>33</TotalOtherOrgCnt>
+      <SupplementalInformationDetail>
+        <FormAndLineReferenceDesc>Part I, Line 2:</FormAndLineReferenceDesc>
+        <ExplanationTxt>The Pasadena Community Foundation monitors the use of grant monies as follows: All agencies are verfied to be a 501c3 public charity and/or grant eligible before grants are awarded. A grant award fund agreement and/or grant letter and report worksheet are sent to the grantees. The grant award fund agreement and/or grant letter explicitly states the purpose of the grant award or restrictions of the grant and specifies expectations for compliance including use of funds, timing, policy on any unspent funds and reporting requirements. The report worksheet requests receipts for capital purchases and/or key accomplishments for program grants. This report is reviewed by PCF staff and if any discrepancies are found PCF asks the agency for reimbursement of funds inappropriately used. These reports are tracked throughout the year and agencies are disqualified for future grants if reports have not been completed. In the case of unrestricted donations to charitable organizations through donor advised funds, grant reports are not required.</ExplanationTxt>
+      </SupplementalInformationDetail>
+    </IRS990ScheduleI>
+  </ReturnData>
+</Return>
