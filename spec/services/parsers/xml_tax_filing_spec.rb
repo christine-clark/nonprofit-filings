@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Parsers::XmlTaxFiling do
@@ -16,7 +18,7 @@ RSpec.describe Parsers::XmlTaxFiling do
         expect(Filer.count).to eq(1)
 
         first_filer = Filer.first
-        expect(first_filer.ein).to eq(200253310)
+        expect(first_filer.ein).to eq(200_253_310)
         expect(first_filer.name).to eq('Pasadena Community Foundation')
         expect(first_filer.address).to eq('301 E Colorado Blvd No 810')
         expect(first_filer.city).to eq('Pasadena')
@@ -30,7 +32,7 @@ RSpec.describe Parsers::XmlTaxFiling do
         expect(Receiver.count).to eq(2)
 
         first_receiver = Receiver.all[0]
-        expect(first_receiver.ein).to eq(131624102)
+        expect(first_receiver.ein).to eq(131_624_102)
         expect(first_receiver.name).to eq('National Audubon Society')
         expect(first_receiver.address).to eq('225 Varick Street 7th Floor')
         expect(first_receiver.city).to eq('New York')
@@ -38,7 +40,7 @@ RSpec.describe Parsers::XmlTaxFiling do
         expect(first_receiver.postal_code).to eq('10014')
 
         second_receiver = Receiver.all[1]
-        expect(second_receiver.ein).to eq(954765734)
+        expect(second_receiver.ein).to eq(954_765_734)
         expect(second_receiver.name).to eq('Southern California Public Radio - KPCC')
         expect(second_receiver.address).to eq('474 S Raymond Ave')
         expect(second_receiver.city).to eq('Pasadena')
@@ -56,20 +58,20 @@ RSpec.describe Parsers::XmlTaxFiling do
         first_award = Award.all[0]
         first_receiver = Receiver.all[0]
         expect(first_award.receiver_id).to eq(first_receiver.id)
-        expect(first_award.grant_cash_amount).to eq(864100)
+        expect(first_award.grant_cash_amount).to eq(864_100)
         expect(first_award.grant_purpose).to eq('General Support')
 
         second_award = Award.all[1]
         second_receiver = Receiver.all[1]
         expect(second_award.receiver_id).to eq(second_receiver.id)
-        expect(second_award.grant_cash_amount).to eq(14665)
+        expect(second_award.grant_cash_amount).to eq(14_665)
         expect(second_award.grant_purpose).to eq('General Support')
 
         third_award = Award.all[2]
         expect(third_award.receiver_id).to eq(second_receiver.id)
-        expect(third_award.grant_cash_amount).to eq(50000)
+        expect(third_award.grant_cash_amount).to eq(50_000)
         expect(third_award.grant_purpose).to eq('Annual Support')
       end
-    end    
+    end
   end
 end

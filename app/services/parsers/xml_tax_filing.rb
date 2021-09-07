@@ -1,48 +1,50 @@
 module Parsers
   # Stream and parse xml files by creating a subclass of Nokogiri::XML::SAX::Document
   class XmlTaxFiling < Nokogiri::XML::SAX::Document
-    INSERT_BATCH_SIZE = 5000.freeze
-  
+    INSERT_BATCH_SIZE = 5000
+
     def start_document
       @filers = []
       @receivers = []
       @awards = []
       @errors = []
     end
-  
+
     def start_element(name, attrs = [])
       @element = name
       @attrs = attrs.to_h
-      
-      if name == 'ReturnHeader'
+
+      case name
+      when 'ReturnHeader'
         @inside_return_header = true
-      elsif name == 'ReturnData'
+      when 'ReturnData'
         @inside_return_data = true
-      elsif name == 'Filer'
+      when 'Filer'
         @inside_filer = true
         @filer = { ein: nil, name: nil, address: nil, city: nil, state: nil, postal_code: nil }
-      elsif name == 'IRS990ScheduleI'
+      when 'IRS990ScheduleI'
         @inside_tax_filing = true
-      elsif name == 'RecipientTable'
+      when 'RecipientTable'
         @inside_receiver = true
         @receiver = { ein: nil, name: nil, address: nil, city: nil, state: nil, postal_code: nil }
-      elsif name == 'CashGrantAmt'
+      when 'CashGrantAmt'
         @award = { grant_cash_amount: nil, grant_purpose: nil, receiver_ein: nil, receiver_id: nil }
       end
     end
 
     def characters(string)
-      set_filer_info(string) if @inside_filer
-      set_receiver_info(string) if @inside_receiver
-      set_award_info(string) if @inside_return_data
+      update_filer_info(string) if @inside_filer && !string.match(/^\n/)
+      update_receiver_info(string) if @inside_receiver && !string.match(/^\n/)
+      update_award_info(string) if @inside_return_data && !string.match(/^\n/)
     end
-  
+
     def end_element(name)
-      if name == 'ReturnHeader'
+      case name
+      when 'ReturnHeader'
         @inside_return_header = false
-      elsif name == 'ReturnData'
+      when 'ReturnData'
         @inside_return_data = false
-      elsif name == 'Filer'
+      when 'Filer'
         if @filer.is_a?(Hash)
           @filer[:created_at] = DateTime.now
           @filer[:updated_at] = DateTime.now
@@ -50,7 +52,7 @@ module Parsers
         end
         @filer = nil
         @inside_filer = false
-      elsif name == 'RecipientTable'
+      when 'RecipientTable'
         if @receiver.is_a?(Hash)
           @receiver[:created_at] = DateTime.now
           @receiver[:updated_at] = DateTime.now
@@ -58,18 +60,18 @@ module Parsers
         end
         @receiver = nil
         @inside_receiver = false
-      elsif name == 'PurposeOfGrantTxt'
+      when 'PurposeOfGrantTxt'
         if @award.is_a?(Hash)
           # Save receiver_ein temporarily which will be used to set receiver_id later.
           @award[:receiver_ein] = @receiver[:ein]
           @awards.push(@award)
         end
         @award = nil
-      elsif name == 'IRS990ScheduleI'
+      when 'IRS990ScheduleI'
         @inside_tax_filing = false
       end
     end
-  
+
     def end_document
       batch_insert_items
     end
@@ -83,48 +85,49 @@ module Parsers
       insert_in_batches('Award', @awards)
     end
 
-    def set_filer_info(value)
+    def update_filer_info(value)
       return unless @filer.is_a?(Hash)
 
-      if @element.include?('EIN') && !value.match(/^\n/)
+      if @element.include?('EIN')
         @filer[:ein] = value
-      elsif @element.include?('NameLine') && !value.match(/^\n/)
+      elsif @element.include?('NameLine')
         @filer[:name] = value
-      elsif @element.include?('AddressLine') && !value.match(/^\n/)
+      elsif @element.include?('AddressLine')
         @filer[:address] = value
-      elsif @element.include?('City') && !value.match(/^\n/)
+      elsif @element.include?('City')
         @filer[:city] = value
-      elsif @element.include?('State') && !value.match(/^\n/)
+      elsif @element.include?('State')
         @filer[:state] = value
-      elsif @element.include?('ZIP') && !value.match(/^\n/) 
+      elsif @element.include?('ZIP')
         @filer[:postal_code] = value
       end
     end
 
-    def set_receiver_info(value)
+    def update_receiver_info(value)
       return unless @receiver.is_a?(Hash)
 
-      if @element.include?('EIN') && !value.match(/^\n/) 
+      if @element.include?('EIN')
         @receiver[:ein] = value
-      elsif @element.include?('NameLine') && !value.match(/^\n/) 
+      elsif @element.include?('NameLine')
         @receiver[:name] = value
-      elsif @element.include?('AddressLine') && !value.match(/^\n/) 
+      elsif @element.include?('AddressLine')
         @receiver[:address] = value
-      elsif @element.include?('City') && !value.match(/^\n/) 
+      elsif @element.include?('City')
         @receiver[:city] = value
-      elsif @element.include?('State') && !value.match(/^\n/) 
+      elsif @element.include?('State')
         @receiver[:state] = value
-      elsif @element.include?('ZIP') && !value.match(/^\n/) 
+      elsif @element.include?('ZIP')
         @receiver[:postal_code] = value
       end
     end
 
-    def set_award_info(value)
+    def update_award_info(value)
       return unless @award.is_a?(Hash)
 
-      if @element == 'CashGrantAmt' && !value.match(/^\n/) 
+      case @element
+      when 'CashGrantAmt'
         @award[:grant_cash_amount] = value
-      elsif @element == 'PurposeOfGrantTxt' && !value.match(/^\n/) 
+      when 'PurposeOfGrantTxt'
         @award[:grant_purpose] = value
       end
     end
@@ -134,7 +137,7 @@ module Parsers
 
       # Awards have to have receivers so they must be saved last and
       # receivers must be set on each award after receivers are saved.
-      set_receivers_on_awards(resource_array) if resource_class === 'Award'
+      update_receivers_on_awards(resource_array) if resource_class == 'Award'
 
       klass = resource_class.constantize
       resource_array.in_groups_of(INSERT_BATCH_SIZE, false) do |batch_array|
@@ -142,7 +145,7 @@ module Parsers
       end
     end
 
-    def set_receivers_on_awards(awards)
+    def update_receivers_on_awards(awards)
       awards.each do |award|
         found_receiver = Receiver.find_by(ein: award[:receiver_ein])
         award.delete(:receiver_ein) # no longer needed

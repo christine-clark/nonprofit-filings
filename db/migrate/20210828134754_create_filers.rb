@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFilers < ActiveRecord::Migration[6.1]
   def change
     create_table :filers do |t|
@@ -20,7 +22,7 @@ class CreateFilers < ActiveRecord::Migration[6.1]
       t.string :city
       t.string :state
       t.string :postal_code, limit: 10
-      
+
       t.index :ein, unique: true
 
       t.timestamps

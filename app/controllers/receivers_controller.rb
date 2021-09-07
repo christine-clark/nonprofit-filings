@@ -1,6 +1,11 @@
+# Get /receivers
 class ReceiversController < ApplicationController
   def index
-    render json: { data: receivers, total_count: total_count, total_pages: total_pages }, include: [:awards], adapter: :json
+    render json: {
+      data: receivers,
+      total_count: total_count,
+      total_pages: total_pages
+    }, include: [:awards], adapter: :json
   end
 
   private

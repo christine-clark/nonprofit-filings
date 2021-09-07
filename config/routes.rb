@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # If we need more routes later, we can always support all
   # resources :filers

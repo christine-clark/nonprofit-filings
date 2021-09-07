@@ -1,6 +1,11 @@
+# Get /filers
 class FilersController < ApplicationController
   def index
-    render json: { data: filers, total_count: total_count, total_pages: total_pages }, adapter: :json
+    render json: {
+      data: filers,
+      total_count: total_count,
+      total_pages: total_pages
+    }, adapter: :json
   end
 
   private

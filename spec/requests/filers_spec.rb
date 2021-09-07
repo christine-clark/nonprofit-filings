@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Filers', type: :request do
@@ -7,7 +9,7 @@ RSpec.describe 'Filers', type: :request do
     end
 
     it 'should return filers' do
-      get '/filers', :headers => { 'ACCEPT' => 'application/json' }
+      get '/filers', headers: { 'ACCEPT' => 'application/json' }
 
       first_filer = @filers.first
       current_filer = json_response['data'][0]
