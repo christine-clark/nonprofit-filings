@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Receiver < ApplicationRecord
   scope :with_awards, ->(_ein) { left_joins(:awards) }
   scope :filter_by_ein, ->(ein) { where(ein: ein) }

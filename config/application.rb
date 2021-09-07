@@ -28,6 +28,13 @@ module NonProfileFilingsApi
 
     config.autoload_paths += %W[#{config.root}/lib #{config.root}/app]
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:4200'
+        resource '*', headers: :any, methods: %i[get post options]
+      end
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

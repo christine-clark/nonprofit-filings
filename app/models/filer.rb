@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Filer < ApplicationRecord
   scope :filter_by_ein, ->(ein) { where ein: ein }
   scope :filter_by_name, ->(name) { where('name like ?', "%#{name}%") }
