@@ -24,7 +24,7 @@ class FilersController < ApplicationController
   def filers
     @filers = Filer.all
     permitted_params.each do |key, value|
-      @filers = @filers.public_send("filter_by_#{key}", value) if value.present?
+      @filers = @filers.public_send("filter_by_#{key}", value) if value.present? && excluded_filters.exclude?(key)
     end
     @filers
   end
@@ -56,5 +56,9 @@ class FilersController < ApplicationController
 
   def total_pages
     paged_filers.total_pages
+  end
+
+  def excluded_filters
+    %w[page per_page]
   end
 end

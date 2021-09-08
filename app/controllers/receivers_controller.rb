@@ -24,7 +24,7 @@ class ReceiversController < ApplicationController
   def receivers
     @receivers = Receiver.all
     permitted_params.each do |key, value|
-      @receivers = @receivers.public_send("filter_by_#{key}", value) if value.present?
+      @receivers = @receivers.public_send("filter_by_#{key}", value) if value.present? && excluded_filters.exclude?(key)
     end
     @receivers
   end
@@ -75,5 +75,9 @@ class ReceiversController < ApplicationController
         }
       }
     end
+  end
+
+  def excluded_filters
+    %w[page per_page]
   end
 end
